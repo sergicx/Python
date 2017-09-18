@@ -3,4 +3,4 @@
 \
 Esta aplicación muestra el tiempo detallado de la ubicación que desees dentro del estado Español.
 #### Probar aplicacion: 
-[Descargar tiempo.exe](http://www110.zippyshare.com/v/XnAKOQAR/file.html).
+[Descargar tiempo.exe](http://www54.zippyshare.com/v/kUAnVJ9J/file.html).
