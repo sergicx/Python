@@ -3,7 +3,7 @@ import urllib
 
 
 def getJsonApi(location):
-	url = "http://api.openweathermap.org/data/2.5/weather?q=%s,es&appid=eb8cb2cf0cd7cb44ded287804edcb7dc&mode=json&units=metric&lang=es" % (location)
+	url = "http://api.openweathermap.org/data/2.5/weather?q=%s&appid=eb8cb2cf0cd7cb44ded287804edcb7dc&mode=json&units=metric&lang=es" % (location)
 	response = urllib.urlopen(url)
 	data = json.loads(response.read())
 	return data
