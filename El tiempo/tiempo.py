@@ -16,7 +16,7 @@ def main():
 	print "La temperatura maxima de hoy es: %s" % str(maxMin[0])
 	print "La temperatura minima de hoy es: %s" % str(maxMin[1])
 	entrada = raw_input("\nDesea hacer otra consulta? (s/n) ")
-	if entrada != "n" or entrada == "N":
+	if entrada != "n" or entrada != "N":
 	    main()
 
 
