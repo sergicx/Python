@@ -64,7 +64,7 @@ def listaPrevision(data):
 		regexDiaFecha = re.findall(r'\d{2}', str(data["list"][i]["dt_txt"]))
 		diaFecha = regexDiaFecha[3]
 		hora = regexDiaFecha[4]
-		if int(diaFecha) > int(diaSistema) and diaFecha != dataAnterior and hora == "15":
+		if int(diaFecha) != int(diaSistema) and diaFecha != dataAnterior and hora == "15":
 			dataAnterior = diaFecha
 			listaPrevision.append("Tiempo para el dia " + diaFecha + ": " + dataWeather)
 
