@@ -3,4 +3,4 @@
 \
 Esta aplicación muestra el tiempo actual detallado de la ciudad donde estés y la previsión de los próximos 4 dias.
 #### Probar aplicacion: 
-[Descargar tiempo.exe para Windows](http://www102.zippyshare.com/v/jtAUqyZq/file.html).
+[Descargar tiempo.exe para Windows](http://www78.zippyshare.com/v/IPUPoqEK/file.html).
