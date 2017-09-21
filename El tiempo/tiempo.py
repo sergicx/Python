@@ -3,6 +3,10 @@ import json
 import urllib
 import re
 import datetime
+from asciiWeather import *
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 
 def main():
@@ -11,10 +15,13 @@ def main():
 	dataPrevision = getJsonApiPrevision(location)
 	maxMin = getMaxMin(dataActual)
 	listaProximosDias = listaPrevision(dataPrevision)
-
-	entrada = None
+	weatherIcon = getAsciiIcon(dataActual)
+	if weatherIcon == None:
+		weatherActualFull = getWeather(dataActual).upper()
+	else:
+		weatherActualFull = getWeather(dataActual).upper() +  "\n\r " + weatherIcon
 	print " \n EL TIEMPO ACTUAL PARA LA UBICACION: %s \n" % (dataActual["name"])
-	print "%s\n" % (getWeather(dataActual).upper())
+	print "%s\n" % (weatherActualFull)
 	print "La temperatura actual es: %s" % str(getTemperature(dataActual))
 	print "La presion actual es: %s hPa" % str(getPressure(dataActual))
 	print "La humedad actual es de: %s%%" % str(getHumidity(dataActual))
@@ -39,6 +46,20 @@ def getJsonApiPrevision(location):
 	response = urllib.urlopen(url)
 	data = json.loads(response.read())
 	return data
+
+def getAsciiIcon(data):
+	iconCode = data["weather"][0]["icon"]
+	if iconCode == "01d" or iconCode == "01n":
+		return asciiSun
+	elif iconCode == "02d" or iconCode == "02n":
+		return asciiPartiallyCloud
+	elif iconCode == "03d" or iconCode == "03n" or iconCode == "04d" or iconCode == "04n":
+		return asciiCloud
+	elif iconCode == "09d" or iconCode == "09n" or iconCode == "10d" or iconCode == "10n":
+		return asciiRain
+	else:
+		return None
+
 
 def getWeather(data):
 	return data["weather"][0]["description"]
