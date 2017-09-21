@@ -20,7 +20,7 @@ def main():
 	print "La humedad actual es de: %s%%" % str(getHumidity(dataActual))
 	print "La temperatura maxima de hoy es: %s" % str(maxMin[0])
 	print "La temperatura minima de hoy es: %s\n" % str(maxMin[1])
-	print "Previsión para los próximos dias: \n"
+	print "Prevision para los proximos dias: \n"
 	for i in range(4):
 		print str(listaProximosDias[i])
 	entrada = raw_input("\nDesea hacer otra consulta? (s/n) ")
@@ -59,7 +59,9 @@ def listaPrevision(data):
 	diaSistema = diaSistema.day
 	listaPrevision = []
 	dataAnterior = None
-	for i in range(39):
+	cantidad = data["cnt"] - 1
+
+	for i in range(cantidad):
 		dataWeather = data["list"][i]["weather"][0]["description"]
 		regexDiaFecha = re.findall(r'\d{2}', str(data["list"][i]["dt_txt"]))
 		diaFecha = regexDiaFecha[3]
