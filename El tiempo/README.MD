@@ -3,6 +3,6 @@
 \
 Esta aplicación muestra el tiempo actual detallado de la ciudad donde estés y la previsión de los próximos 4 dias.
 #### Preview
-![Preview](https://github.com/sergicx/Python/blob/master/El%20tiempo/apppreview.png)
+![Preview](https://github.com/sergicx/Python/blob/master/El%20tiempo/preview.png)
 #### Descargar aplicacion: 
-[Descargar tiempo.exe para Windows](http://www39.zippyshare.com/v/A7b0Lh1z/file.html).
+[Descargar tiempo.exe para Windows](http://www44.zippyshare.com/v/ZJfMAari/file.html).
