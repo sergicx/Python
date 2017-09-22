@@ -29,8 +29,8 @@ def main():
 	print "La temperatura minima de hoy es: %s\n" % str(maxMin[1])
 	print "Prevision para los proximos dias: \n"
 	for i in listaProximosDias:
-		print i
-	entrada = raw_input("\nDesea hacer otra consulta? (s/n) ")
+		print i,
+	entrada = raw_input("Desea hacer otra consulta? (s/n) ")
 	if entrada != "n":
 		main()
 
@@ -95,11 +95,11 @@ def listaPrevision(data):
 				j = j + 1
 			else:
 				if hora == "09":
-					listaPrevision.append("Mañana: " + dataWeather )
+					listaPrevision.append("Mañana: " + dataWeather + "\t")
 				elif hora == "15":
-					listaPrevision.append("Tarde: " + dataWeather)
+					listaPrevision.append("Tarde: " + dataWeather + "\t")
 				elif hora == "21":
-					listaPrevision.append("Noche: " + dataWeather + "\n")
+					listaPrevision.append("Noche: " + dataWeather + "\n\n")
 
 	return listaPrevision
 
