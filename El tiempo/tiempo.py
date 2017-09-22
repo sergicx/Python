@@ -28,8 +28,8 @@ def main():
 	print "La temperatura maxima de hoy es: %s" % str(maxMin[0])
 	print "La temperatura minima de hoy es: %s\n" % str(maxMin[1])
 	print "Prevision para los proximos dias: \n"
-	for i in range(4):
-		print str(listaProximosDias[i])
+	for i in listaProximosDias:
+		print i
 	entrada = raw_input("\nDesea hacer otra consulta? (s/n) ")
 	if entrada != "n":
 		main()
@@ -81,15 +81,25 @@ def listaPrevision(data):
 	listaPrevision = []
 	dataAnterior = None
 	cantidad = data["cnt"] - 1
+	j = 0
 
 	for i in range(cantidad):
 		dataWeather = data["list"][i]["weather"][0]["description"]
 		regexDiaFecha = re.findall(r'\d{2}', str(data["list"][i]["dt_txt"]))
 		diaFecha = regexDiaFecha[3]
 		hora = regexDiaFecha[4]
-		if int(diaFecha) != int(diaSistema) and diaFecha != dataAnterior and hora == "15":
-			dataAnterior = diaFecha
-			listaPrevision.append("Tiempo para el dia " + diaFecha + ": " + dataWeather)
+		if int(diaFecha) != int(diaSistema):
+			if diaFecha != dataAnterior and j <= 3:
+				listaPrevision.append("Tiempo para el dia " + diaFecha + ": \n")
+				dataAnterior = diaFecha
+				j = j + 1
+			else:
+				if hora == "09":
+					listaPrevision.append("Mañana: " + dataWeather )
+				elif hora == "15":
+					listaPrevision.append("Tarde: " + dataWeather)
+				elif hora == "21":
+					listaPrevision.append("Noche: " + dataWeather + "\n")
 
 	return listaPrevision
 
