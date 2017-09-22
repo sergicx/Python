@@ -80,7 +80,7 @@ def listaPrevision(data):
 	diaSistema = diaSistema.day
 	listaPrevision = []
 	dataAnterior = None
-	cantidad = data["cnt"] - 1
+	cantidad = data["cnt"]
 	j = 0
 
 	for i in range(cantidad):
@@ -93,7 +93,7 @@ def listaPrevision(data):
 				listaPrevision.append("Tiempo para el dia " + diaFecha + ": \n")
 				dataAnterior = diaFecha
 				j = j + 1
-			else:
+			elif diaFecha == dataAnterior and j <= 4:
 				if hora == "09":
 					listaPrevision.append("Mañana: " + dataWeather + "\t")
 				elif hora == "15":
