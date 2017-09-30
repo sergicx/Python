@@ -20,7 +20,7 @@ def main():
 		weatherActualFull = getWeather(dataActual).upper()
 	else:
 		weatherActualFull = getWeather(dataActual).upper() +  "\n\r " + weatherIcon
-	print " \n EL TIEMPO ACTUAL PARA LA UBICACION: %s \n" % (dataActual["name"])
+	print " \n EL TIEMPO ACTUAL PARA LA UBICACION: %s, %s \n" % (dataActual["name"], dataActual["sys"]["country"])
 	print "%s\n" % (weatherActualFull)
 	print "La temperatura actual es: %s" % str(getTemperature(dataActual))
 	print "La presion actual es: %s hPa" % str(getPressure(dataActual))
