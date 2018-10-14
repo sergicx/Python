@@ -1,5 +1,5 @@
 # Aplicacion que muestra el tiempo
-(Esta aplicación solo funciona con Pyhton 2)
+(Esta aplicación solo funciona con Pyhton 3)
 \
 Esta aplicación muestra el tiempo actual detallado de la ciudad donde estés y la previsión de los próximos 4 dias.
 #### Preview
