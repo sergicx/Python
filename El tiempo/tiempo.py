@@ -1,61 +1,67 @@
 # -*- coding: utf-8 -*-
 import json
-import urllib
+import urllib.request
 import re
 import datetime
 from asciiWeather import *
-import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
 
 
-def main():
-	location = str(raw_input("Escribe tu ubicacion: "))
+def main():	
+	location = str(input("Escribe tu ubicacion: "))
 	dataActual = getJsonApiActual(location)
-	dataPrevision = getJsonApiPrevision(location)
-	maxMin = getMaxMin(dataActual)
-	listaProximosDias = listaPrevision(dataPrevision)
-	weatherIcon = getAsciiIcon(dataActual)
-	if weatherIcon == None:
-		weatherActualFull = getWeather(dataActual).upper()
-	else:
-		weatherActualFull = getWeather(dataActual).upper() +  "\n\r " + weatherIcon
-	print " \n EL TIEMPO ACTUAL PARA LA UBICACION: %s, %s \n" % (dataActual["name"], dataActual["sys"]["country"])
-	print "%s\n" % (weatherActualFull)
-	print "La temperatura actual es: %s" % str(getTemperature(dataActual))
-	print "La presion actual es: %s hPa" % str(getPressure(dataActual))
-	print "La humedad actual es de: %s%%" % str(getHumidity(dataActual))
-	print "La temperatura maxima de hoy es: %s" % str(maxMin[0])
-	print "La temperatura minima de hoy es: %s\n" % str(maxMin[1])
-	print "Prevision para los proximos dias: \n"
-	for i in listaProximosDias:
-		print i,
-	entrada = raw_input("Desea hacer otra consulta? (s/n) ")
-	if entrada != "n":
+	if dataActual == 404:
+		print("Lugar no encontrado!")
 		main()
+	else:
+		dataPrevision = getJsonApiPrevision(location)
+		maxMin = getMaxMin(dataActual)
+		listaProximosDias = listaPrevision(dataPrevision)
+		weatherIcon = getAsciiIcon(dataActual)
+		if weatherIcon == None:
+			weatherActualFull = getWeather(dataActual).upper()
+		else:
+			weatherActualFull = getWeather(dataActual).upper() +  "\n\r " + weatherIcon
+		print(" \n EL TIEMPO ACTUAL PARA LA UBICACION: %s, %s \n" % (dataActual["name"], dataActual["sys"]["country"]))
+		print("%s\n" % (weatherActualFull))
+		print("La temperatura actual es: %s" % str(getTemperature(dataActual)))
+		print("La presion actual es: %s hPa" % str(getPressure(dataActual)))
+		print("La humedad actual es de: %s%%" % str(getHumidity(dataActual)))
+		print("La temperatura maxima de hoy es: %s" % str(maxMin[0]))
+		print("La temperatura minima de hoy es: %s\n" % str(maxMin[1]))
+		print("Prevision para los proximos dias: \n")
+		for i in listaProximosDias:
+			print(i),
+		entrada = input("Desea hacer otra consulta? (s/n) ")
+		if entrada != "n":
+			main()
 
 
 def getJsonApiActual(location):
 	url = "http://api.openweathermap.org/data/2.5/weather?q=%s&appid=eb8cb2cf0cd7cb44ded287804edcb7dc&mode=json&units=metric&lang=es" % (location)
-	response = urllib.urlopen(url)
-	data = json.loads(response.read())
-	return data
+	try:
+		response = urllib.request.urlopen(url)
+		data = json.loads(response.read())
+		return data
+	except urllib.error.HTTPError as e:
+		return 404
+
 
 def getJsonApiPrevision(location):
 	url = "http://api.openweathermap.org/data/2.5/forecast?q=%s&appid=eb8cb2cf0cd7cb44ded287804edcb7dc&mode=json&units=metric&lang=es" % (location)
-	response = urllib.urlopen(url)
+	response = urllib.request.urlopen(url)
 	data = json.loads(response.read())
 	return data
 
 def getAsciiIcon(data):
 	iconCode = data["weather"][0]["icon"]
+	print(iconCode)
 	if iconCode == "01d" or iconCode == "01n":
 		return asciiSun
 	elif iconCode == "02d" or iconCode == "02n":
 		return asciiPartiallyCloud
 	elif iconCode == "03d" or iconCode == "03n" or iconCode == "04d" or iconCode == "04n":
 		return asciiCloud
-	elif iconCode == "09d" or iconCode == "09n" or iconCode == "10d" or iconCode == "10n":
+	elif iconCode == "09d" or iconCode == "09n" or iconCode == "10d" or iconCode == "10n" or iconCode == "11d":
 		return asciiRain
 	else:
 		return None
